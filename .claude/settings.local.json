@@ -9,7 +9,11 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
-      "PowerShell(Copy-Item *)"
+      "PowerShell(Copy-Item *)",
+      "Bash(npx tsc *)",
+      "Bash(npx -y @posthog/wizard@latest)",
+      "Bash(node -e \"require\\('posthog-js'\\)\")",
+      "Bash(npm install *)"
     ]
   }
 }

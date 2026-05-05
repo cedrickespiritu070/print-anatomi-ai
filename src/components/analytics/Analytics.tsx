@@ -2,37 +2,54 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import posthog from "posthog-js";
 
-// ---------------------------------------------------------------------------
-// Lightweight analytics shim — swap body of `capture` for posthog-js once
-// NEXT_PUBLIC_POSTHOG_KEY is set in .env.local:
-//   import posthog from "posthog-js";
-//   posthog.capture(event, props);
-// ---------------------------------------------------------------------------
+const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+const HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
 
-function capture(event: string, props?: Record<string, unknown>) {
-  if (process.env.NODE_ENV === "development") {
-    console.debug("[analytics]", event, props ?? {});
-  }
-  // TODO: window.posthog?.capture(event, props);
+let initialized = false;
+
+function init() {
+  if (initialized || !KEY || typeof window === "undefined") return;
+  posthog.init(KEY, {
+    api_host: HOST,
+    capture_pageview: false,
+    capture_pageleave: true,
+    autocapture: true,
+  });
+  initialized = true;
 }
 
-/** Call this on any "Book Demo" click to attribute the conversion source. */
+/** Call on any "Book Demo" click to attribute the conversion source. */
 export function trackBookDemoClick(source: string) {
-  capture("book_demo_click", { source });
+  init();
+  posthog.capture("book_demo_click", { source });
+}
+
+/** Call on any primary CTA click (navbar, hero, etc.). */
+export function trackCTAClick(source: string) {
+  init();
+  posthog.capture("cta_click", { source });
 }
 
 /** Drop <Analytics /> once into layout — handles pageviews + scroll depth. */
 export function Analytics() {
   const pathname = usePathname();
 
-  // Pageview on mount and every client-side route change
+  // Init PostHog once on first render
   useEffect(() => {
-    capture("$pageview", { path: pathname });
+    init();
+  }, []);
+
+  // Manual pageview on each route change (capture_pageview is false above)
+  useEffect(() => {
+    if (!initialized) return;
+    posthog.capture("$pageview", { $current_url: window.location.href });
   }, [pathname]);
 
   // Scroll depth — fires at 25 / 50 / 75 / 100 % per page
   useEffect(() => {
+    if (!initialized) return;
     const checkpoints = [25, 50, 75, 100];
     const fired = new Set<number>();
 
@@ -44,7 +61,10 @@ export function Analytics() {
       for (const cp of checkpoints) {
         if (pct >= cp && !fired.has(cp)) {
           fired.add(cp);
-          capture("scroll_depth", { percent: cp, path: pathname });
+          posthog.capture("scroll_depth", {
+            percent: cp,
+            path: pathname,
+          });
         }
       }
     };
