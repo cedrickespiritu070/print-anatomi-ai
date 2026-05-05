@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
+@theme {
+  /* Brand palette */
+  --color-charcoal: #121212;
+  --color-charcoal-soft: #2a2a2a;
+  --color-light-neutral: #f8f8f6;
+  --color-light-neutral-dark: #f0f0ed;
+  --color-teal: #00c2a8;
+  --color-teal-dark: #00a391;
+  --color-teal-light: #e6faf7;
+  --color-muted: #6b7280;
+  /* Lighter border for premium diffused look */
+  --color-border: #f0f0f0;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #121212;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Mesh gradient ─────────────────────────────────────────────────────────
+   Five subtle radial blobs: two teals, two purples, one blue.
+   Each at ≤7% opacity so they read as texture, not colour.
+   ──────────────────────────────────────────────────────────────────────── */
+.mesh-gradient {
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(at 14% 22%, rgba(139, 92, 246, 0.055) 0px, transparent 55%),
+    radial-gradient(at 83% 10%, rgba(0, 194, 168, 0.07)   0px, transparent 50%),
+    radial-gradient(at 55% 88%, rgba(59, 130, 246, 0.045) 0px, transparent 55%),
+    radial-gradient(at 93% 62%, rgba(168, 85, 247, 0.04)  0px, transparent 45%),
+    radial-gradient(at 6%  74%, rgba(0, 194, 168, 0.035)  0px, transparent 42%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Diffused card shadows ─────────────────────────────────────────────── */
+.shadow-diffuse {
+  box-shadow:
+    0 2px 8px  0 rgba(0, 0, 0, 0.04),
+    0 4px 24px 0 rgba(0, 0, 0, 0.03);
 }
 
+.shadow-diffuse-md {
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.06),
+    0 8px 40px 0 rgba(0, 0, 0, 0.04);
+}
+
+.shadow-diffuse-lg {
+  box-shadow:
+    0 8px 24px  0 rgba(0, 0, 0, 0.07),
+    0 16px 56px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #00c2a8;
+  color: #ffffff;
 }
