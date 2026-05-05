@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { trackBookDemoClick } from "@/components/analytics/Analytics";
 
 const CALENDLY = "https://calendly.com/atonomi/demo";
@@ -29,12 +30,21 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-        {/* Wordmark */}
+        {/* Logo + wordmark */}
         <a
           href="/"
-          className="text-xl font-bold tracking-tight text-charcoal hover:text-teal transition-colors"
+          className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
         >
-          atonomi
+          <Image
+            src="/assets/anatomi-logo.png"
+            alt="atonomi logo"
+            width={28}
+            height={28}
+            className="rounded-md"
+          />
+          <span className="text-xl font-bold tracking-tight text-charcoal">
+            atonomi
+          </span>
         </a>
 
         {/* Book a Demo CTA */}
