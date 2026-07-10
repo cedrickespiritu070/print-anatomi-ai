@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Analytics } from "@/components/analytics/Analytics";
+import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,9 +56,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col mesh-gradient text-charcoal">
-        <Navbar />
-        {children}
-        <Analytics />
+        <PostHogProvider>
+          <Navbar />
+          {children}
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   );

@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# print.atonomi.ai
 
-## Getting Started
+A marketing landing page for atonomi’s apparel printing outreach platform, built with Next.js and Tailwind CSS.
 
-First, run the development server:
+This repository contains the public-facing website experience for the automated postcard + personalized landing page product that helps screen-print, DTG, and embroidery shops win more local B2B orders.
+
+## ✨ Highlights
+
+- Clean, modern landing page design optimized for conversions
+- Dedicated sections for hero, problem, solution, features, testimonials, pricing, and FAQ
+- Custom postcard showcase and visual product flow
+- Responsive layout using the Next.js App Router
+- Smooth interactions powered by Framer Motion
+- PostHog analytics integration for visitor tracking
+
+## 🛠️ Tech Stack
+
+- `next` 16.2.4
+- `react` 19.2.4
+- `tailwindcss` 4
+- `framer-motion`
+- `lucide-react`
+- `posthog-js`
+- `typescript`
+- `eslint`
+
+## 📁 Project Structure
+
+- `src/app/page.tsx` — landing page composition
+- `src/components/` — section components used on the page
+- `src/app/globals.css` — global styling and base layout rules
+- `src/public/assets/` — static assets and illustrations
+- `atonomi-Engineering-Landing-Page-Instructions.md` — design and copy brief for the landing page
+
+## 🚀 Get Started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## � Preview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Local preview:** open [http://localhost:3000](http://localhost:3000) after running `npm run dev`
+- **Deployment preview:** if linked to Vercel, preview URLs appear automatically for pull requests.
 
-## Learn More
+## �📦 Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` — run the app locally
+- `npm run build` — build for production
+- `npm run start` — run the production build locally
+- `npm run lint` — run ESLint checks
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧭 Recommended Workflow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Edit or add page sections in `src/components/`
+2. Preview changes locally at `http://localhost:3000`
+3. Commit copy and UI updates
+4. Deploy previews and production builds to Vercel
 
-## Deploy on Vercel
+## 🌐 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is well-suited for Vercel deployment.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Connect the repository to Vercel
+2. Use the `main` branch for production
+3. Enable automatic builds on push
+
+## 📌 Notes
+
+This repo reflects the atonomi landing page brief: automated local lead generation for custom apparel businesses through postcard outreach, AI mockups, and branded landing pages.
+
+For full product and visual guidelines, see `atonomi-Engineering-Landing-Page-Instructions.md`.
